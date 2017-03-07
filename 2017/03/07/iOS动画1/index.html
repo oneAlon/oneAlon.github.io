@@ -89,30 +89,30 @@
 
 <meta name="description" content="准备学习下iOS的动画,写几篇文章梳理下知识
 
-知识补充在开始之前先来了解一些知识CALayer CADisplayLink position  anchorPoint transform 
+知识补充在开始之前先来了解一些知识CALayer CADisplayLink position  anchorPoint transform 隐式动画 
 
 CALayer 
-每个UIView都有一个layer属性, UIView本身不具备显示的功能,UIView能够显示出来主要是它的layer属性,当UIView需要显示出来的时候就会调用(void)draw">
+每个UIView都有一个layer属性, UIView本身不具备显示的功能,UIView能够显示出来主要是它的layer属性,当UIView需要显示出来的时候就会调用(void">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS动画:时钟动画">
 <meta property="og:url" content="http://yoursite.com/2017/03/07/iOS动画1/index.html">
 <meta property="og:site_name" content="OneAlon’s Blog">
 <meta property="og:description" content="准备学习下iOS的动画,写几篇文章梳理下知识
 
-知识补充在开始之前先来了解一些知识CALayer CADisplayLink position  anchorPoint transform 
+知识补充在开始之前先来了解一些知识CALayer CADisplayLink position  anchorPoint transform 隐式动画 
 
 CALayer 
-每个UIView都有一个layer属性, UIView本身不具备显示的功能,UIView能够显示出来主要是它的layer属性,当UIView需要显示出来的时候就会调用(void)draw">
+每个UIView都有一个layer属性, UIView本身不具备显示的功能,UIView能够显示出来主要是它的layer属性,当UIView需要显示出来的时候就会调用(void">
 <meta property="og:image" content="http://yoursite.com/uploads/images/QQ20170307-4.png">
-<meta property="og:updated_time" content="2017-03-07T11:50:57.000Z">
+<meta property="og:updated_time" content="2017-03-07T12:23:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS动画:时钟动画">
 <meta name="twitter:description" content="准备学习下iOS的动画,写几篇文章梳理下知识
 
-知识补充在开始之前先来了解一些知识CALayer CADisplayLink position  anchorPoint transform 
+知识补充在开始之前先来了解一些知识CALayer CADisplayLink position  anchorPoint transform 隐式动画 
 
 CALayer 
-每个UIView都有一个layer属性, UIView本身不具备显示的功能,UIView能够显示出来主要是它的layer属性,当UIView需要显示出来的时候就会调用(void)draw">
+每个UIView都有一个layer属性, UIView本身不具备显示的功能,UIView能够显示出来主要是它的layer属性,当UIView需要显示出来的时候就会调用(void">
 <meta name="twitter:image" content="http://yoursite.com/uploads/images/QQ20170307-4.png">
 
 
@@ -341,26 +341,32 @@ CALayer
         <blockquote>
 <p>准备学习下iOS的动画,写几篇文章梳理下知识</p>
 </blockquote>
-<h3 id="知识补充"><a href="#知识补充" class="headerlink" title="知识补充"></a>知识补充</h3><p>在开始之前先来了解一些知识<code>CALayer</code> <code>CADisplayLink</code> <code>position</code>  <code>anchorPoint</code> <code>transform</code> </p>
+<h3 id="知识补充"><a href="#知识补充" class="headerlink" title="知识补充"></a>知识补充</h3><p>在开始之前先来了解一些知识<code>CALayer</code> <code>CADisplayLink</code> <code>position</code>  <code>anchorPoint</code> <code>transform</code> <code>隐式动画</code> </p>
 <ul>
 <li><p><code>CALayer</code> </p>
 <p>每个UIView都有一个layer属性, UIView本身不具备显示的功能,UIView能够显示出来主要是它的layer属性,当UIView需要显示出来的时候就会调用<code>(void)drawRect:(CGRect)rect</code> 方法,在<code>drawRect</code>方法中将需要显示出来的内容绘制到自己的layer图层中显示出来.</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>,<span class="keyword">readonly</span>,<span class="keyword">strong</span>) <span class="built_in">CALayer</span>  *layer;  <span class="comment">// returns view's layer. Will always return a non-nil value. view is layer's delegate</span></div></pre></td></tr></table></figure>
-<p>通过操作<code>CALayer</code>可以很方便的调整<code>UIView</code>的外观<code>阴影</code> <code>圆角</code> <code>边框大小和颜色</code> 等,还可以给<code>UIView</code>添加一些非常酷炫的动画.</p>
-<p>CALayer的一些属性(具体属性可在CALayer头文件查看):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@property CGRect bounds;// layer的大小</div><div class="line">@property CGPoint position;// 定位</div><div class="line">@property CGPoint anchorPoint;// 锚点</div><div class="line">@property CATransform3D transform;// 形变</div><div class="line">@property BOOL masksToBounds;// 超出部分裁剪</div></pre></td></tr></table></figure>
+<p>通过操作<code>CALayer</code>可以很方便的调整<code>UIView</code>的外观<code>阴影</code> <code>圆角</code> <code>边框大小和颜色</code> 等,还可以给<code>UIView</code>添加一些非常酷炫的动画.在<code>CALayer</code>中不能使用<code>UIImage</code>和<code>UIColor</code>,只能使用<code>CGImageRef</code>和<code>CGColorRef</code>.</p>
+<p><code>CALayer</code>的一些属性(具体属性可在<code>CALayer</code>头文件查看):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@property CGRect bounds;// layer的大小,设置layer的宽度和高度</div><div class="line">@property CGPoint position;// 定位</div><div class="line">@property CGPoint anchorPoint;// 锚点</div><div class="line">@property(nullable) CGColorRef borderColor;// 边框颜色</div><div class="line">@property CGFloat borderWidth;// 边框宽</div><div class="line">@property float opacity;// 透明度</div><div class="line">@property(nullable) CGColorRef shadowColor;// 阴影色</div><div class="line">@property(nullable) CGColorRef backgroundColor;// 背景色</div><div class="line">@property CGFloat cornerRadius;// 圆角半径</div><div class="line">@property CATransform3D transform;// 形变</div><div class="line">@property BOOL masksToBounds;// 超出部分裁剪</div><div class="line">@property(nullable, strong) id contents;// 内容</div></pre></td></tr></table></figure>
+<p><code>CALayer</code>和<code>UIView</code>如何选择:</p>
+<ul>
+<li><p><code>CALayer</code>和<code>UIView</code>能够实现相同的显示效果,但是<code>CALayer</code>不能处理事件,而<code>UIView</code>可以</p>
+</li>
+<li><p><code>CALayer</code>的性能会比<code>UIView</code>性能高,因为<code>CALayer</code>少了处理事件的功能</p>
 <p>​</p>
+</li>
+</ul>
 </li>
 <li><p><code>CADisplayLink</code> </p>
 <p><code>CADisplayLink</code>是<code>QuartzCore.framework</code> 中的一个类,能够让我们和屏幕刷新频率同步的将内容绘制到屏幕上,iOS的屏幕刷新频率为60次/s,所以<code>CADisplayLink</code>的<code>selector</code>方法没60s调用一次,也可以通过设置<code>CADisplayLink</code>的属性<code>frameInterval</code>修改.</p>
+<p><code>CADisplayLink</code>和<code>NSTimer</code>比较:<code>CADisplayLink</code>是一个计时器，可以使绘图代码与视图的刷新频率保持同步，而<code>NSTimer</code>无法确保计时器实际被触发的准确时间.</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建CADisplayLink</span></div><div class="line"><span class="built_in">CADisplayLink</span> *link = [<span class="built_in">CADisplayLink</span> displayLinkWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(timeChange)];</div><div class="line"><span class="comment">// 将link添加到runloop中,会自动调用(Unless paused, it will fire every vsync until removed.)</span></div><div class="line">[link addToRunLoop:[<span class="built_in">NSRunLoop</span> mainRunLoop] forMode:<span class="built_in">NSDefaultRunLoopMode</span>];</div></pre></td></tr></table></figure>
-<p>​</p>
 </li>
 <li><p><code>position</code> 和 <code>anchorPoint</code>  </p>
 <p><code>position</code>决定了layer在父控件中的位置</p>
 <p><code>anchorPoint</code>决定了相对于layer的哪个位置定位,是layer的一个属性</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* Defines the anchor point of the layer's bounds rect, as a point in</span></div><div class="line"> * normalized layer coordinates - '(0, 0)' is the bottom left corner of</div><div class="line"> * the bounds rect, '(1, 1)' is the top right corner. Defaults to</div><div class="line"> * '(0.5, 0.5)', i.e. the center of the bounds rect. Animatable. */</div><div class="line"><span class="comment">// 取值范围为0~1,(0,0)为左上角,(1,1)为右下角</span></div><div class="line"><span class="keyword">@property</span> <span class="built_in">CGPoint</span> anchorPoint;</div></pre></td></tr></table></figure>
-<p>​</p>
 </li>
 <li><p><code>transform</code> </p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* A transform applied to the layer relative to the anchor point of its</span></div><div class="line"> * bounds rect. Defaults to the identity transform. Animatable. */</div><div class="line"></div><div class="line"><span class="keyword">@property</span> <span class="built_in">CATransform3D</span> transform;</div></pre></td></tr></table></figure>
@@ -368,6 +374,15 @@ CALayer
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">self</span>.minLayer.transform = <span class="built_in">CATransform3DMakeRotation</span>(M_PI_4, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>);</div></pre></td></tr></table></figure>
 <blockquote>
 <p>上句代码意思,从minLayer的锚点到(0,0,1)连根线,围绕这根线旋转45度,也就是围绕Z轴旋转45度</p>
+</blockquote>
+</li>
+<li><p>隐式动画</p>
+<p>每一个<code>UIView</code>内部都默认关联着一个<code>CALayer</code>，我们可用称这个<code>Layer</code>为<code>Root Layer</code>(根层),我们手动创建的<code>CALayer</code>对象(非<code>RootLayer</code>)都存在着隐式动画</p>
+<p>隐式动画:对非<code>RootLayer</code>的一些属性进行修改时,会自动产生一些动画效果,可以通过事务<code>CATransaction</code>关闭默认的隐式动画</p>
+<blockquote>
+<p>bounds：用于设置CALayer的宽度和高度。修改这个属性会产生缩放动画</p>
+<p>backgroundColor：用于设置CALayer的背景色。修改这个属性会产生背景色的渐变动画</p>
+<p>position：用于设置CALayer的位置。修改这个属性会产生平移动画</p>
 </blockquote>
 </li>
 </ul>

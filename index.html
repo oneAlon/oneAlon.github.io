@@ -450,17 +450,13 @@
 
       
         
-          
-          
-这里利用heightForRowAtIndexPath:方法计算不等高cell的高度,在使用这个方法之前要明确这个方法的调用时间以及调用次数:
-
-
-1.每当reloadData时，有多少条数据，就会调用多少次这个方法（比如一共有80条数据，就会调用80次这个方法）
-2.每当有cell出现时，就会调用一次这个方法12345//返回cell的高度- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath&#123;return cellHeight;&#125;
-
-
-
-          ...
+          <blockquote>
+<p>这里利用heightForRowAtIndexPath:方法计算不等高cell的高度,在使用这个方法之前要明确这个方法的调用时间以及调用次数:</p>
+</blockquote>
+<ul>
+<li>1.每当reloadData时，有多少条数据，就会调用多少次这个方法（比如一共有80条数据，就会调用80次这个方法）</li>
+<li>2.每当有cell出现时，就会调用一次这个方法</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2017/03/07/计算tableView不等高cell高度的几种方法/#more" rel="contents">

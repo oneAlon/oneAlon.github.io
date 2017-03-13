@@ -1,0 +1,881 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,iOS动画," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1.简介
+Core Animation:核心动画,一组强大的动画处理API,能够做出非常酷炫的动画效果.
+作用在CALayer层,并非UIView.
+Core Animation的动画执行过程都是在后台操作的，不会阻塞主线程.
+
+2.层级结构
+
+3.CAMediaTimingCAMediaTiming是CAAnimation遵循的一个协议,来看下这个协议的一些常见属性
+1234567@proper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS动画:CoreAnimation">
+<meta property="og:url" content="http://yoursite.com/2017/03/07/iOS动画CoreAnimation/index.html">
+<meta property="og:site_name" content="OneAlon’s Blog">
+<meta property="og:description" content="1.简介
+Core Animation:核心动画,一组强大的动画处理API,能够做出非常酷炫的动画效果.
+作用在CALayer层,并非UIView.
+Core Animation的动画执行过程都是在后台操作的，不会阻塞主线程.
+
+2.层级结构
+
+3.CAMediaTimingCAMediaTiming是CAAnimation遵循的一个协议,来看下这个协议的一些常见属性
+1234567@proper">
+<meta property="og:image" content="http://yoursite.com/uploads/images/iOS动画CoreAnimation/QQ20170307-0.png">
+<meta property="og:updated_time" content="2017-03-08T08:12:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS动画:CoreAnimation">
+<meta name="twitter:description" content="1.简介
+Core Animation:核心动画,一组强大的动画处理API,能够做出非常酷炫的动画效果.
+作用在CALayer层,并非UIView.
+Core Animation的动画执行过程都是在后台操作的，不会阻塞主线程.
+
+2.层级结构
+
+3.CAMediaTimingCAMediaTiming是CAAnimation遵循的一个协议,来看下这个协议的一些常见属性
+1234567@proper">
+<meta name="twitter:image" content="http://yoursite.com/uploads/images/iOS动画CoreAnimation/QQ20170307-0.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/07/iOS动画CoreAnimation/"/>
+
+
+
+
+
+  <title> iOS动画:CoreAnimation | OneAlon’s Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">OneAlon’s Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/07/iOS动画CoreAnimation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="OneAlon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="OneAlon’s Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS动画:CoreAnimation
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T20:39:19+08:00">
+                2017-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h3><ul>
+<li><code>Core Animation</code>:核心动画,一组强大的动画处理API,能够做出非常酷炫的动画效果.</li>
+<li>作用在<code>CALayer</code>层,并非<code>UIView</code>.</li>
+<li><code>Core Animation</code>的动画执行过程都是在后台操作的，不会阻塞主线程.</li>
+</ul>
+<h3 id="2-层级结构"><a href="#2-层级结构" class="headerlink" title="2.层级结构"></a>2.层级结构</h3><div align="center"><img src="/uploads/images/iOS动画CoreAnimation/QQ20170307-0.png" alt="层级结构"></div>
+
+<h3 id="3-CAMediaTiming"><a href="#3-CAMediaTiming" class="headerlink" title="3.CAMediaTiming"></a>3.CAMediaTiming</h3><p><code>CAMediaTiming</code>是<code>CAAnimation</code>遵循的一个协议,来看下这个协议的一些常见属性</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> <span class="built_in">CFTimeInterval</span> beginTime;<span class="comment">// 开始时间,默认为0</span></div><div class="line"><span class="keyword">@property</span> <span class="built_in">CFTimeInterval</span> duration;<span class="comment">// 持续时间,默认为0</span></div><div class="line"><span class="keyword">@property</span> <span class="keyword">float</span> speed;<span class="comment">// 执行速度,默认为1</span></div><div class="line"><span class="keyword">@property</span> <span class="keyword">float</span> repeatCount;<span class="comment">// 执行次数,默认为0,无限循环设置为MAXFLOAT</span></div><div class="line"><span class="keyword">@property</span> <span class="built_in">CFTimeInterval</span> repeatDuration;<span class="comment">// 重复动画持续时间</span></div><div class="line"><span class="keyword">@property</span> <span class="built_in">BOOL</span> autoreverses;<span class="comment">// 自动翻转</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">copy</span>) <span class="built_in">NSString</span> *fillMode;<span class="comment">// 填充方式</span></div></pre></td></tr></table></figure>
+<p>动画填充方式fillMode:</p>
+<blockquote>
+<p>注意:如果想要fillMode有效,最好设置removedOnCompletion 为 NO</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* Defines how the timed object behaves outside its active duration.</span></div><div class="line"> * Local time may be clamped to either end of the active duration, or</div><div class="line"> * the element may be removed from the presentation. The legal values</div><div class="line"> * are `backwards', `forwards', `both' and `removed'. Defaults to</div><div class="line"> * `removed'. */</div><div class="line"><span class="keyword">@property</span>(<span class="keyword">copy</span>) <span class="built_in">NSString</span> *fillMode;</div><div class="line"></div><div class="line">kCAFillModeRemoved :这个是默认值,也就是说当动画开始前和动画结束后，动画对layer都没有影响，动画结束后，layer会恢复到之前的状态.</div><div class="line">kCAFillModeForwards :当动画结束后,layer会一直保持动画最后的状态</div><div class="line">kCAFillModeBackwards :在动画开始前，只需要将动画加入了一个layer，layer便立即进入动画的初始状态并等待动画开始</div><div class="line">kCAFillModeBoth :这个其实就是上面两个的合成.动画加入后开始之前，layer便处于动画初始状态，动画结束后layer保持动画最后的状态</div></pre></td></tr></table></figure>
+<h3 id="4-CAAnimation"><a href="#4-CAAnimation" class="headerlink" title="4.CAAnimation"></a>4.CAAnimation</h3><p><code>CAAnimation</code>是所有动画对象的父类,是个抽象类不能直接使用,负责控制动画执行时间和速度</p>
+<p>常见属性:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span>(<span class="keyword">getter</span>=isRemovedOnCompletion) <span class="built_in">BOOL</span> removedOnCompletion;<span class="comment">// 动画执行完成从layer上移除,默认为YES</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>, <span class="keyword">strong</span>) <span class="built_in">CAMediaTimingFunction</span> *timingFunction;<span class="comment">// 速度控制函数,控制动画运行的节奏</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>, <span class="keyword">strong</span>) <span class="keyword">id</span> &lt;<span class="built_in">CAAnimationDelegate</span>&gt; delegate;<span class="comment">// 代理</span></div></pre></td></tr></table></figure>
+<p>代理方法:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 动画开始的时候调用</span></div><div class="line">- (<span class="keyword">void</span>)animationDidStart:(<span class="built_in">CAAnimation</span> *)anim;</div><div class="line"><span class="comment">// 动画结束的时候调用</span></div><div class="line">- (<span class="keyword">void</span>)animationDidStop:(<span class="built_in">CAAnimation</span> *)anim finished:(<span class="built_in">BOOL</span>)flag;</div></pre></td></tr></table></figure>
+<p>方法:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 传入key,获取默认的value(传入的key与CALayer中的key值相同)</span></div><div class="line">+ (<span class="keyword">nullable</span> <span class="keyword">id</span>)defaultValueForKey:(<span class="built_in">NSString</span> *)key;</div><div class="line"><span class="comment">// 是否需要存档</span></div><div class="line">- (<span class="built_in">BOOL</span>)shouldArchiveValueForKey:(<span class="built_in">NSString</span> *)key;</div></pre></td></tr></table></figure>
+<p><code>CALyer</code>中常用的key:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">transform.rotation.x</td>
+<td style="text-align:center">CGFloat或float</td>
+<td style="text-align:center">绕x轴旋转</td>
+</tr>
+<tr>
+<td style="text-align:center">transform.rotation.y</td>
+<td style="text-align:center">CGFloat或float</td>
+<td style="text-align:center">绕y轴旋转</td>
+</tr>
+<tr>
+<td style="text-align:center">transform.rotation.z</td>
+<td style="text-align:center">CGFloat或float</td>
+<td style="text-align:center">绕z轴旋转</td>
+</tr>
+<tr>
+<td style="text-align:center">transform.rotation</td>
+<td style="text-align:center">CGFloat或float</td>
+<td style="text-align:center">绕z轴旋转</td>
+</tr>
+<tr>
+<td style="text-align:center">——</td>
+<td style="text-align:center">——</td>
+<td style="text-align:center">——</td>
+</tr>
+<tr>
+<td style="text-align:center">transform.scale.x</td>
+<td style="text-align:center">CGFloat</td>
+<td style="text-align:center">缩放x轴</td>
+</tr>
+<tr>
+<td style="text-align:center">transform.scale.y</td>
+<td style="text-align:center">CGFloat</td>
+<td style="text-align:center">缩放y轴</td>
+</tr>
+<tr>
+<td style="text-align:center">transform.scale.z</td>
+<td style="text-align:center">CGFloat</td>
+<td style="text-align:center">缩放z轴</td>
+</tr>
+<tr>
+<td style="text-align:center">transform.scale</td>
+<td style="text-align:center">CGFloat</td>
+<td style="text-align:center">整个layer缩放</td>
+</tr>
+<tr>
+<td style="text-align:center">——</td>
+<td style="text-align:center">——</td>
+<td style="text-align:center">——</td>
+</tr>
+<tr>
+<td style="text-align:center">transform.translation.x</td>
+<td style="text-align:center">CGFloat</td>
+<td style="text-align:center">沿x轴移动</td>
+</tr>
+<tr>
+<td style="text-align:center">transform.translation.y</td>
+<td style="text-align:center">CGFloat</td>
+<td style="text-align:center">沿y轴移动</td>
+</tr>
+<tr>
+<td style="text-align:center">transform.translation.z</td>
+<td style="text-align:center">CGFloat</td>
+<td style="text-align:center">沿z轴移动</td>
+</tr>
+<tr>
+<td style="text-align:center">transform.translation</td>
+<td style="text-align:center">CGFloat</td>
+<td style="text-align:center">整个layer沿xyz轴都移动</td>
+</tr>
+<tr>
+<td style="text-align:center">——</td>
+<td style="text-align:center">——</td>
+<td style="text-align:center">——</td>
+</tr>
+<tr>
+<td style="text-align:center">opacity</td>
+<td style="text-align:center">CGFloat</td>
+<td style="text-align:center">透明度</td>
+</tr>
+<tr>
+<td style="text-align:center">backgroundColor</td>
+<td style="text-align:center">CGColor</td>
+<td style="text-align:center">背景色</td>
+</tr>
+<tr>
+<td style="text-align:center">cornerRadius</td>
+<td style="text-align:center">CGFloat</td>
+<td style="text-align:center">圆角半径</td>
+</tr>
+<tr>
+<td style="text-align:center">position</td>
+<td style="text-align:center">CGPoint</td>
+<td style="text-align:center">定位,用于做平移(配合锚点)</td>
+</tr>
+</tbody>
+</table>
+<p>速度控制函数CAMediaTimingFunction:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">/** Timing function names. **/</div><div class="line">CA_EXTERN NSString * const kCAMediaTimingFunctionLinear</div><div class="line">    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);</div><div class="line">CA_EXTERN NSString * const kCAMediaTimingFunctionEaseIn</div><div class="line">    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);</div><div class="line">CA_EXTERN NSString * const kCAMediaTimingFunctionEaseOut</div><div class="line">    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);</div><div class="line">CA_EXTERN NSString * const kCAMediaTimingFunctionEaseInEaseOut</div><div class="line">    CA_AVAILABLE_STARTING (10.5, 2.0, 9.0, 2.0);</div><div class="line">CA_EXTERN NSString * const kCAMediaTimingFunctionDefault</div><div class="line">    CA_AVAILABLE_STARTING (10.6, 3.0, 9.0, 2.0);</div><div class="line">    </div><div class="line">kCAMediaTimingFunctionLinear :线性</div><div class="line">kCAMediaTimingFunctionEaseIn :渐进,缓慢进入,加速离开</div><div class="line">kCAMediaTimingFunctionEaseOut :渐出,全速进入,减速到达目的地</div><div class="line">kCAMediaTimingFunctionEaseInEaseOut :渐进渐出,缓慢进入,中间加速,减速到达目的地,默认行为</div></pre></td></tr></table></figure>
+<h3 id="5-CAPropertyAnimation"><a href="#5-CAPropertyAnimation" class="headerlink" title="5.CAPropertyAnimation"></a>5.CAPropertyAnimation</h3><p><code>CAPropertyAnimation</code>是<code>CAAnimation</code>的一个子类,也是抽象类,不能直接使用,如果想要创建动画只能使用它的两个子类<code>CABasicAnimation</code>和<code>CAKeyframeAnimation</code> </p>
+<p>属性keyPath:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* The key-path describing the property to be animated. */</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *keyPath;</div><div class="line"></div><div class="line">通过指定<span class="built_in">CALayer</span>的一个属性名称为keyPath（<span class="built_in">NSString</span>类型），并且对<span class="built_in">CALayer</span>的这个属性的值进行修改，达到相应的动画效果。比如，指定@“position”为keyPath，就修改<span class="built_in">CALayer</span>的position属性的值，以达到平移的动画效果</div></pre></td></tr></table></figure>
+<h4 id="5-1CABasicAnimation基础动画"><a href="#5-1CABasicAnimation基础动画" class="headerlink" title="5.1CABasicAnimation基础动画"></a>5.1CABasicAnimation基础动画</h4><p><code>CABasicAnimation</code>是<code>CAPropertyAnimation</code>的一个子类,只有三个属性</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// keyPath响应属性的初始值</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>, <span class="keyword">strong</span>) <span class="keyword">id</span> fromValue;</div><div class="line"><span class="comment">// keyPath相应属性的结束值</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>, <span class="keyword">strong</span>) <span class="keyword">id</span> toValue;</div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>, <span class="keyword">strong</span>) <span class="keyword">id</span> byValue;</div></pre></td></tr></table></figure>
+<h4 id="5-2CAKeyframeAnimation关键帧动画"><a href="#5-2CAKeyframeAnimation关键帧动画" class="headerlink" title="5.2CAKeyframeAnimation关键帧动画"></a>5.2CAKeyframeAnimation关键帧动画</h4><p><code>CAKeyframeAnimation</code>是<code>CAPropertyAnimation</code>的一个子类,与<code>CABasicAnimation</code>的区别是<code>CABasicAnimation</code>只能从一个开始值到一个结束值,而<code>CAPropertyAnimation</code>可以只能多个值,这些值保存在一个数组中,<code>CABasicAnimation</code>可以看做是只有两个关键帧的<code>CAPropertyAnimation</code> </p>
+<p>常见属性:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 存储关键帧</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSArray</span> *values;</div><div class="line"><span class="comment">// 可以设置一个CGPathRef、CGMutablePathRef，让图层按照路径轨迹移动。path只对CALayer的anchorPoint和position起作用。如果设置了path，那么values将被忽略</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>) <span class="built_in">CGPathRef</span> path;</div><div class="line"><span class="comment">// 关键帧对应的时间点,每个keyTime对一个values中的每一帧,值为0~1,如果没有设置keyTimes,那么每一帧的执行时间是平分的</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSArray</span>&lt;<span class="built_in">NSNumber</span> *&gt; *keyTimes;</div></pre></td></tr></table></figure>
+<h3 id="6-CAAnimationGroup动画组"><a href="#6-CAAnimationGroup动画组" class="headerlink" title="6.CAAnimationGroup动画组"></a>6.CAAnimationGroup动画组</h3><p><code>CAAnimationGroup</code>是<code>CAAnimation</code>的一个子类,可以保存一组动画对象,将<code>CAAnimationGroup</code>对象加入layer层后，组中所有动画对象可以同时并发运行</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* An array of CAAnimation objects. Each member of the array will run</span></div><div class="line"> * concurrently in the time space of the parent animation using the</div><div class="line"> * normal rules. */</div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSArray</span>&lt;<span class="built_in">CAAnimation</span> *&gt; *animations;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>默认情况下animations中的动画是同时进行的,但是也可以通过修改动画的beginTime修改动画的开始时间</p>
+</blockquote>
+<h3 id="7-CATransition转场动画"><a href="#7-CATransition转场动画" class="headerlink" title="7.CATransition转场动画"></a>7.CATransition转场动画</h3><p><code>CATransition</code>是<code>CAAnimation</code>的一个子类,用于做转场动画,能够为<code>layer</code>层提供移出屏幕和移入屏幕的动画效果</p>
+<p>属性:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 动画过度类型</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">copy</span>) <span class="built_in">NSString</span> *type;</div><div class="line"><span class="comment">// 动画过度方向</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *subtype;</div><div class="line"><span class="comment">/* The amount of progress through to the transition at which to begin</span></div><div class="line"> * and end execution. Legal values are numbers in the range [0,1].</div><div class="line"> * `endProgress' must be greater than or equal to `startProgress'.</div><div class="line"> * Default values are 0 and 1 respectively. */</div><div class="line"><span class="comment">// 动画的起点和终点,起点必须小于终点,默认值分别为0和1</span></div><div class="line"><span class="keyword">@property</span> <span class="keyword">float</span> startProgress;</div><div class="line"><span class="keyword">@property</span> <span class="keyword">float</span> endProgress;</div></pre></td></tr></table></figure>
+<p>过度动画的效果(设置<code>CATransition</code>的<code>type</code>属性):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型字符串</th>
+<th style="text-align:center">效果说明</th>
+<th style="text-align:center">关键字</th>
+<th style="text-align:center">效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">fade</td>
+<td style="text-align:center">交叉淡化过渡</td>
+<td style="text-align:center">YES</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/iOS动画/" rel="tag"># iOS动画</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/07/iOS动画时钟动画/" rel="next" title="iOS动画:时钟动画">
+                <i class="fa fa-chevron-left"></i> iOS动画:时钟动画
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/08/iOS动画CoreAnimation实例/" rel="prev" title="iOS动画:CoreAnimation简单实例">
+                iOS动画:CoreAnimation简单实例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/images/avatar.jpg"
+               alt="OneAlon" />
+          <p class="site-author-name" itemprop="name">OneAlon</p>
+           
+              <p class="site-description motion-element" itemprop="description">上善若水任方圆</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-简介"><span class="nav-number">1.</span> <span class="nav-text">1.简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-层级结构"><span class="nav-number">2.</span> <span class="nav-text">2.层级结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-CAMediaTiming"><span class="nav-number">3.</span> <span class="nav-text">3.CAMediaTiming</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-CAAnimation"><span class="nav-number">4.</span> <span class="nav-text">4.CAAnimation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-CAPropertyAnimation"><span class="nav-number">5.</span> <span class="nav-text">5.CAPropertyAnimation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1CABasicAnimation基础动画"><span class="nav-number">5.1.</span> <span class="nav-text">5.1CABasicAnimation基础动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2CAKeyframeAnimation关键帧动画"><span class="nav-number">5.2.</span> <span class="nav-text">5.2CAKeyframeAnimation关键帧动画</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-CAAnimationGroup动画组"><span class="nav-number">6.</span> <span class="nav-text">6.CAAnimationGroup动画组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-CATransition转场动画"><span class="nav-number">7.</span> <span class="nav-text">7.CATransition转场动画</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">OneAlon</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

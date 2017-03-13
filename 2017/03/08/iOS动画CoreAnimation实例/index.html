@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="blog," />
+  <meta name="keywords" content="iOS,iOS动画," />
 
 
 
@@ -87,20 +87,16 @@
 
 
 
-<meta name="description" content="前段时间用hexo+github搭建了自己的博客,中间遇到了一些问题,公司项目又赶得比较急,暂时搁置了一段时间,今天闲下来重写把博客搭建了一遍,使用next主题以后,发现并没有像阅读全文的按钮,查了下资料,这里总结一下.">
+<meta name="description" content="1.平移12345678910111213141516171819202122// 平移- (IBAction)translate:(id)sender &amp;#123;    CABasicAnimation *animation = [CABasicAnimation animation];    // 设置动画属性    animation.keyPath = @&amp;quot;position&amp;q">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设置博客阅读全文">
-<meta property="og:url" content="http://yoursite.com/2017/03/07/设置博客阅读全文/index.html">
+<meta property="og:title" content="iOS动画:CoreAnimation简单实例">
+<meta property="og:url" content="http://yoursite.com/2017/03/08/iOS动画CoreAnimation实例/index.html">
 <meta property="og:site_name" content="OneAlon’s Blog">
-<meta property="og:description" content="前段时间用hexo+github搭建了自己的博客,中间遇到了一些问题,公司项目又赶得比较急,暂时搁置了一段时间,今天闲下来重写把博客搭建了一遍,使用next主题以后,发现并没有像阅读全文的按钮,查了下资料,这里总结一下.">
-<meta property="og:image" content="http://yoursite.com/uploads/images/QQ20170307-0.png">
-<meta property="og:image" content="http://yoursite.com/uploads/images/QQ20170307-1.png">
-<meta property="og:image" content="http://yoursite.com/uploads/images/QQ20170307-2.png">
-<meta property="og:updated_time" content="2017-03-07T08:19:58.000Z">
+<meta property="og:description" content="1.平移12345678910111213141516171819202122// 平移- (IBAction)translate:(id)sender &amp;#123;    CABasicAnimation *animation = [CABasicAnimation animation];    // 设置动画属性    animation.keyPath = @&amp;quot;position&amp;q">
+<meta property="og:updated_time" content="2017-03-08T09:54:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设置博客阅读全文">
-<meta name="twitter:description" content="前段时间用hexo+github搭建了自己的博客,中间遇到了一些问题,公司项目又赶得比较急,暂时搁置了一段时间,今天闲下来重写把博客搭建了一遍,使用next主题以后,发现并没有像阅读全文的按钮,查了下资料,这里总结一下.">
-<meta name="twitter:image" content="http://yoursite.com/uploads/images/QQ20170307-0.png">
+<meta name="twitter:title" content="iOS动画:CoreAnimation简单实例">
+<meta name="twitter:description" content="1.平移12345678910111213141516171819202122// 平移- (IBAction)translate:(id)sender &amp;#123;    CABasicAnimation *animation = [CABasicAnimation animation];    // 设置动画属性    animation.keyPath = @&amp;quot;position&amp;q">
 
 
 
@@ -128,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/07/设置博客阅读全文/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/08/iOS动画CoreAnimation实例/"/>
 
 
 
 
 
-  <title> 设置博客阅读全文 | OneAlon’s Blog </title>
+  <title> iOS动画:CoreAnimation简单实例 | OneAlon’s Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -253,7 +249,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/07/设置博客阅读全文/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/08/iOS动画CoreAnimation实例/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="OneAlon">
@@ -274,7 +270,7 @@
             
             
               
-                设置博客阅读全文
+                iOS动画:CoreAnimation简单实例
               
             
           </h1>
@@ -289,8 +285,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T13:46:52+08:00">
-                2017-03-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-08T16:11:01+08:00">
+                2017-03-08
               </time>
             
 
@@ -325,16 +321,9 @@
       
 
       
-        <blockquote>
-<p>前段时间用<a href="https://hexo.io/?_blank" target="_blank" rel="external">hexo</a>+<a href="https://github.com/?_blank" target="_blank" rel="external">github</a>搭建了自己的博客,中间遇到了一些问题,公司项目又赶得比较急,暂时搁置了一段时间,今天闲下来重写把博客搭建了一遍,使用<a href="http://theme-next.iissnan.com/?_blank" target="_blank" rel="external">next</a>主题以后,发现并没有像阅读全文的按钮,查了下资料,这里总结一下.</p>
-</blockquote>
-<a id="more"></a>
-<h3 id="1-使用-lt-more-gt-手动拦截"><a href="#1-使用-lt-more-gt-手动拦截" class="headerlink" title="1.使用&lt;!--more--&gt;手动拦截"></a>1.使用<code>&lt;!--more--&gt;</code>手动拦截</h3><p>在自己觉得合适的地方添加<code>&lt;!--more--&gt;</code>,这种方法比较灵活(推荐使用)</p>
-<p><img src="/uploads/images/QQ20170307-0.png" alt="图片"></p>
-<h3 id="2-设置front-matter"><a href="#2-设置front-matter" class="headerlink" title="2.设置front-matter"></a>2.设置<code>front-matter</code></h3><p>在<code>front-matter</code>中设置<code>description</code></p>
-<p><img src="/uploads/images/QQ20170307-1.png" alt="图片"></p>
-<h3 id="3-在主题配置文件中修改"><a href="#3-在主题配置文件中修改" class="headerlink" title="3.在主题配置文件中修改"></a>3.在<code>主题配置文件</code>中修改</h3><p>在<code>主题配置文件</code>中搜索<code>auto_excerpt</code>,设置<code>enable</code>为<code>true</code>,<code>length</code>为默认截取的字符长度</p>
-<p><img src="/uploads/images/QQ20170307-2.png" alt="图片"></p>
+        <h3 id="1-平移"><a href="#1-平移" class="headerlink" title="1.平移"></a>1.平移</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">// 平移</div><div class="line">- (IBAction)translate:(id)sender &#123;</div><div class="line">    CABasicAnimation *animation = [CABasicAnimation animation];</div><div class="line">    // 设置动画属性</div><div class="line">    animation.keyPath = @&quot;position&quot;;</div><div class="line">    // 设置动画开始值</div><div class="line">//    animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(0, 0)];</div><div class="line">    // 设置动画结束值</div><div class="line">    animation.toValue = [NSValue valueWithCGPoint:CGPointMake(300, 300)];</div><div class="line">    // 设置动画的开始时间,先获取当前时间,再加上要延迟的时间</div><div class="line">    CFTimeInterval bTime = 1.0f;</div><div class="line">    animation.beginTime = CACurrentMediaTime() + bTime;</div><div class="line">    // 设置动画执行时长</div><div class="line">    animation.duration = 1.0f;</div><div class="line">    // 设置动画填充模式</div><div class="line">    animation.fillMode = kCAFillModeForwards;</div><div class="line">    // 动画执行完成是否移除</div><div class="line">    animation.removedOnCompletion = NO;</div><div class="line">    // 设置代理</div><div class="line">    animation.delegate = self;</div><div class="line">    [self.redLayer addAnimation:animation forKey:nil];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-旋转"><a href="#2-旋转" class="headerlink" title="2.旋转"></a>2.旋转</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">// 旋转</div><div class="line">- (IBAction)rotate:(id)sender &#123;</div><div class="line">    CABasicAnimation *animation = [CABasicAnimation animation];</div><div class="line">    // 设置动画属性</div><div class="line">    animation.keyPath = @&quot;transform.rotation.z&quot;;</div><div class="line">    // 设置动画开始值</div><div class="line">//    animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(0, 0)];</div><div class="line">    // 设置动画结束值</div><div class="line">    animation.toValue = @((45) * M_PI / 180.0);</div><div class="line">    // 设置动画的开始时间,先获取当前时间,再加上要延迟的时间</div><div class="line">    CFTimeInterval bTime = 1.0f;</div><div class="line">    animation.beginTime = CACurrentMediaTime() + bTime;</div><div class="line">    // 设置动画执行时长</div><div class="line">    animation.duration = 2.0f;</div><div class="line">    // 设置动画填充模式</div><div class="line">    animation.fillMode = kCAFillModeForwards;</div><div class="line">    // 动画执行完成是否移除</div><div class="line">    animation.removedOnCompletion = NO;</div><div class="line">    // 设置代理</div><div class="line">    animation.delegate = self;</div><div class="line">    [self.redLayer addAnimation:animation forKey:nil];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-缩放"><a href="#3-缩放" class="headerlink" title="3.缩放"></a>3.缩放</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">// 缩放</div><div class="line">- (IBAction)scale:(id)sender &#123;</div><div class="line">    CABasicAnimation *animation = [CABasicAnimation animation];</div><div class="line">    // 设置动画属性</div><div class="line">    animation.keyPath = @&quot;transform.scale&quot;;</div><div class="line">    // 设置动画开始值</div><div class="line">    //    animation.fromValue = [NSValue valueWithCGPoint:CGPointMake(0, 0)];</div><div class="line">    // 设置动画结束值</div><div class="line">    animation.toValue = @0.6;</div><div class="line">    // 设置动画的开始时间,先获取当前时间,再加上要延迟的时间</div><div class="line">    CFTimeInterval bTime = 1.0f;</div><div class="line">    animation.beginTime = CACurrentMediaTime() + bTime;</div><div class="line">    // 设置动画执行时长</div><div class="line">    animation.duration = 1.0f;</div><div class="line">    // 设置动画填充模式</div><div class="line">    animation.fillMode = kCAFillModeForwards;</div><div class="line">    // 动画执行完成是否移除</div><div class="line">    animation.removedOnCompletion = NO;</div><div class="line">    // 设置代理</div><div class="line">    animation.delegate = self;</div><div class="line">    [self.redLayer addAnimation:animation forKey:nil];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -358,7 +347,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/blog/" rel="tag"># blog</a>
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+            <a href="/tags/iOS动画/" rel="tag"># iOS动画</a>
           
         </div>
       
@@ -371,8 +362,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/07/计算tableView不等高cell高度的几种方法/" rel="next" title="计算tableView不等高cell高度的几种方法">
-                <i class="fa fa-chevron-left"></i> 计算tableView不等高cell高度的几种方法
+              <a href="/2017/03/07/iOS动画CoreAnimation/" rel="next" title="iOS动画:CoreAnimation">
+                <i class="fa fa-chevron-left"></i> iOS动画:CoreAnimation
               </a>
             
           </div>
@@ -381,8 +372,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/07/iOS动画时钟动画/" rel="prev" title="iOS动画:时钟动画">
-                iOS动画:时钟动画 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/09/CALayer学习/" rel="prev" title="CALayer学习">
+                CALayer学习 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -455,7 +446,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -501,7 +492,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-使用-lt-more-gt-手动拦截"><span class="nav-number">1.</span> <span class="nav-text">1.使用<!--more-->手动拦截</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-设置front-matter"><span class="nav-number">2.</span> <span class="nav-text">2.设置front-matter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-在主题配置文件中修改"><span class="nav-number">3.</span> <span class="nav-text">3.在主题配置文件中修改</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-平移"><span class="nav-number">1.</span> <span class="nav-text">1.平移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-旋转"><span class="nav-number">2.</span> <span class="nav-text">2.旋转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-缩放"><span class="nav-number">3.</span> <span class="nav-text">3.缩放</span></a></li></ol></div>
             
 
           </div>

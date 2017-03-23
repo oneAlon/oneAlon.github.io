@@ -87,15 +87,24 @@
 
 
 
-<meta name="description" content="上善若水任方圆">
+<meta name="description" content="CAGradientLayerCAGradientLayer是CALayer的子类,主要用于多种颜色平滑渐变的.
+属性:
+12345678910// 颜色数组,CGColorRef@property(nullable, copy) NSArray *colors;// 取值范围0~1,对应颜色数组@property(nullable, copy) NSArray&amp;lt;NSNumber *&amp;gt;">
 <meta property="og:type" content="website">
-<meta property="og:title" content="OneAlon’s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/iOS动画/index.html">
+<meta property="og:title" content="CALayer学习">
+<meta property="og:url" content="http://yoursite.com/备用blog/CALayer学习.html">
 <meta property="og:site_name" content="OneAlon’s Blog">
-<meta property="og:description" content="上善若水任方圆">
+<meta property="og:description" content="CAGradientLayerCAGradientLayer是CALayer的子类,主要用于多种颜色平滑渐变的.
+属性:
+12345678910// 颜色数组,CGColorRef@property(nullable, copy) NSArray *colors;// 取值范围0~1,对应颜色数组@property(nullable, copy) NSArray&amp;lt;NSNumber *&amp;gt;">
+<meta property="og:image" content="http://yoursite.com/uploads/images/CALayer学习/QQ20170309-0.png">
+<meta property="og:updated_time" content="2017-03-10T03:39:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OneAlon’s Blog">
-<meta name="twitter:description" content="上善若水任方圆">
+<meta name="twitter:title" content="CALayer学习">
+<meta name="twitter:description" content="CAGradientLayerCAGradientLayer是CALayer的子类,主要用于多种颜色平滑渐变的.
+属性:
+12345678910// 颜色数组,CGColorRef@property(nullable, copy) NSArray *colors;// 取值范围0~1,对应颜色数组@property(nullable, copy) NSArray&amp;lt;NSNumber *&amp;gt;">
+<meta name="twitter:image" content="http://yoursite.com/uploads/images/CALayer学习/QQ20170309-0.png">
 
 
 
@@ -123,13 +132,19 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/iOS动画/"/>
+  <link rel="canonical" href="http://yoursite.com/备用blog/CALayer学习.html"/>
 
 
 
 
 
-  <title> 标签: iOS动画 | OneAlon’s Blog </title>
+  <title>
+  
+
+  
+    CALayer学习 | OneAlon’s Blog
+  
+</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -238,102 +253,26 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        iOS动画
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+  <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline">CALayer学习</h1>
+
+
+
+</header>
 
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/08/iOS动画CoreAnimation实例/" itemprop="url">
-              
-                <span itemprop="name">iOS动画:CoreAnimation简单实例</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-08T16:11:01+08:00"
-              content="2017-03-08" >
-          03-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/07/iOS动画CoreAnimation/" itemprop="url">
-              
-                <span itemprop="name">iOS动画:CoreAnimation</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-07T20:39:19+08:00"
-              content="2017-03-07" >
-          03-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/07/iOS动画时钟动画/" itemprop="url">
-              
-                <span itemprop="name">iOS动画:时钟动画</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-07T17:16:42+08:00"
-              content="2017-03-07" >
-          03-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      <h3 id="CAGradientLayer"><a href="#CAGradientLayer" class="headerlink" title="CAGradientLayer"></a>CAGradientLayer</h3><p><code>CAGradientLayer</code>是<code>CALayer</code>的子类,主要用于多种颜色平滑渐变的.</p>
+<p>属性:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 颜色数组,CGColorRef</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSArray</span> *colors;</div><div class="line"><span class="comment">// 取值范围0~1,对应颜色数组</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">nullable</span>, <span class="keyword">copy</span>) <span class="built_in">NSArray</span>&lt;<span class="built_in">NSNumber</span> *&gt; *locations;</div><div class="line"><span class="comment">// 开始点,[0,0]左上角,[1,1]右下角</span></div><div class="line"><span class="keyword">@property</span> <span class="built_in">CGPoint</span> startPoint;</div><div class="line"><span class="comment">// 结束点,同上</span></div><div class="line"><span class="keyword">@property</span> <span class="built_in">CGPoint</span> endPoint;</div><div class="line"><span class="comment">// 类型,只能设置为axial(默认值)</span></div><div class="line"><span class="keyword">@property</span>(<span class="keyword">copy</span>) <span class="built_in">NSString</span> *type;</div></pre></td></tr></table></figure>
+<p>简单使用:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="built_in">CAGradientLayer</span> *gradientLayer = [<span class="built_in">CAGradientLayer</span> layer];</div><div class="line">    gradientLayer.frame = <span class="keyword">self</span>.view.bounds;</div><div class="line">    <span class="comment">// 设置颜色</span></div><div class="line">    gradientLayer.colors = @[(<span class="keyword">id</span>)[<span class="built_in">UIColor</span> purpleColor].CGColor, (<span class="keyword">id</span>)[<span class="built_in">UIColor</span> redColor].CGColor];</div><div class="line">    <span class="comment">// 开始点</span></div><div class="line">    gradientLayer.startPoint = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">0</span>);</div><div class="line">    <span class="comment">// 结束点</span></div><div class="line">    gradientLayer.endPoint = <span class="built_in">CGPointMake</span>(<span class="number">0.5</span>, <span class="number">1</span>);</div><div class="line">    <span class="comment">// 定位点</span></div><div class="line">    gradientLayer.locations = @[@<span class="number">0.65</span>, @<span class="number">1</span>];</div><div class="line">    </div><div class="line">    [<span class="keyword">self</span>.view.layer addSublayer:gradientLayer];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>实现效果:</p>
+<div align="center"><img src="/uploads/images/CALayer学习/QQ20170309-0.png" alt="实现效果"></div>
     
   </div>
-
-  
 
           
           </div>
@@ -341,6 +280,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -376,7 +319,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -387,7 +330,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

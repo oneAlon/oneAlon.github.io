@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="1. NSObject对象我们再Xcode中编写的Objective-C代码, 底层是转换为C/C++代码, OC中的对象和类主要是基于C/C++中的结构体实现的.    创建一个Command Line Tool, 代码如下 1234567int main(int argc, const char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;">
+<meta name="description" content="1. NSObject对象我们再Xcode中编写的Objective-C代码, 底层是转换为C/C++代码, OC中的对象和类主要是基于C/C++中的结构体实现的.">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="01. OC对象本质">
+<meta property="og:title" content="OC对象本质">
 <meta property="og:url" content="http://yoursite.com/2017/08/03/01-OC对象本质/index.html">
 <meta property="og:site_name" content="OneAlon">
-<meta property="og:description" content="1. NSObject对象我们再Xcode中编写的Objective-C代码, 底层是转换为C/C++代码, OC中的对象和类主要是基于C/C++中的结构体实现的.    创建一个Command Line Tool, 代码如下 1234567int main(int argc, const char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;">
+<meta property="og:description" content="1. NSObject对象我们再Xcode中编写的Objective-C代码, 底层是转换为C/C++代码, OC中的对象和类主要是基于C/C++中的结构体实现的.">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/34862291.png">
 <meta property="og:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/64157653.png">
@@ -96,10 +96,10 @@
 <meta property="og:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/51671948.png">
 <meta property="og:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/52615464.png">
 <meta property="og:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/50952681.png">
-<meta property="og:updated_time" content="2018-08-03T09:20:56.772Z">
+<meta property="og:updated_time" content="2018-08-03T10:07:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="01. OC对象本质">
-<meta name="twitter:description" content="1. NSObject对象我们再Xcode中编写的Objective-C代码, 底层是转换为C/C++代码, OC中的对象和类主要是基于C/C++中的结构体实现的.    创建一个Command Line Tool, 代码如下 1234567int main(int argc, const char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;">
+<meta name="twitter:title" content="OC对象本质">
+<meta name="twitter:description" content="1. NSObject对象我们再Xcode中编写的Objective-C代码, 底层是转换为C/C++代码, OC中的对象和类主要是基于C/C++中的结构体实现的.">
 <meta name="twitter:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/34862291.png">
 
 
@@ -108,7 +108,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -136,7 +136,7 @@
 
 
 
-  <title>01. OC对象本质 | OneAlon</title>
+  <title>OC对象本质 | OneAlon</title>
   
 
 
@@ -201,6 +201,26 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -260,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">01. OC对象本质</h1>
+          <h1 class="post-title" itemprop="name headline">OC对象本质</h1>
         
 
         <div class="post-meta">
@@ -311,6 +331,7 @@
 
       
         <h2 id="1-NSObject对象"><a href="#1-NSObject对象" class="headerlink" title="1. NSObject对象"></a>1. NSObject对象</h2><p>我们再<code>Xcode</code>中编写的<code>Objective-C</code>代码, 底层是转换为C/C++代码, <code>OC</code>中的对象和类主要是基于C/C++中的结构体实现的.</p>
+<a id="more"></a>
 <p>  <img src="/2017/08/03/01-OC对象本质/34862291.png" alt="34862291"></p>
 <p>创建一个<code>Command Line Tool</code>, 代码如下</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[]) &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="built_in">NSObject</span> *obj = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, obj);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -371,6 +392,30 @@
 
     
 
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/ZhiFuBao.png" alt="OneAlon 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
     
 
     
@@ -541,11 +586,7 @@
 
 
 
-  <span class="post-meta-divider">|</span>
 
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 

@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -97,7 +97,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -191,6 +191,26 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -252,7 +272,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/03/01-OC对象本质/" itemprop="url">01. OC对象本质</a></h1>
+                <a class="post-title-link" href="/2017/08/03/01-OC对象本质/" itemprop="url">OC对象本质</a></h1>
         
 
         <div class="post-meta">
@@ -303,61 +323,14 @@
 
       
         
-          
-            <h2 id="1-NSObject对象"><a href="#1-NSObject对象" class="headerlink" title="1. NSObject对象"></a>1. NSObject对象</h2><p>我们再<code>Xcode</code>中编写的<code>Objective-C</code>代码, 底层是转换为C/C++代码, <code>OC</code>中的对象和类主要是基于C/C++中的结构体实现的.</p>
-<p>  <img src="/2017/08/03/01-OC对象本质/34862291.png" alt="34862291"></p>
-<p>创建一个<code>Command Line Tool</code>, 代码如下</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[]) &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="built_in">NSObject</span> *obj = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, obj);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>将<code>OC</code>代码转换为C++文件, 查看代码的本质. 在main.m文件所在目录执行如下代码.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcrun -sdk iphoneos clang -arch arm64 -rewrite-objc main.m -o main-arm64.cpp</span><br></pre></td></tr></table></figure>
-<p>会生成main-arm64.cpp文件, 在main-arm64.cpp中搜索<code>NSObject</code></p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="built_in">NSObject_IMPL</span> &#123;</span><br><span class="line">Class isa;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><code>NSObject_IMPL</code>就是<code>NSObject</code>的内部实现. 这个结构体中只有一个Class类型的isa.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typedef struct objc_class *Class;</span><br></pre></td></tr></table></figure>
-<p>Class是一个指向结构体的指针, NSObject对象的本质就是, 内部有一个指向结构体的isa指针.</p>
-<h2 id="2-自定义对象的内存结构"><a href="#2-自定义对象的内存结构" class="headerlink" title="2. 自定义对象的内存结构"></a>2. 自定义对象的内存结构</h2><p>使用同样的方法将OC代码转为C++代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct Person_IMPL &#123;</span><br><span class="line">struct NSObject_IMPL NSObject_IVARS;</span><br><span class="line">int _no;</span><br><span class="line">int _age;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>我们已知<code>NSObject</code>类的本质是一个指向结构体的指针.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct Person_IMPL &#123;</span><br><span class="line">    class isa;</span><br><span class="line">    int _no;</span><br><span class="line">    int _age;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>为了验证<code>Person</code>类的本质, 创建一个<code>WYL_Person_IMPL</code>结构体.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">struct WYL_Person_IMPL &#123;</span><br><span class="line">    Class isa;</span><br><span class="line">    int _no;</span><br><span class="line">    int _age;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>将创建的<code>Person</code>对象强转为指向<code>WYL_Person_IMPL</code>结构体的指针.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int main(int argc, const char * argv[]) &#123;</span><br><span class="line">    @autoreleasepool &#123;</span><br><span class="line">        Person *p = [[Person alloc] init];</span><br><span class="line">        p-&gt;_no = 10;</span><br><span class="line">        p-&gt;_age = 20;</span><br><span class="line">        NSLog(@&quot;%@&quot;, p);</span><br><span class="line">        struct WYL_Person_IMPL *personImp = (__bridge struct WYL_Person_IMPL *)p;</span><br><span class="line">        NSLog(@&quot;no:%zd, age:%zd&quot;, personImp-&gt;_no, personImp-&gt;_age);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们把指向Person对象的指针p, 强制指向结构体, Person对象在内存中的布局和结构体在内存中的布局相同.</p>
-<h2 id="3-OC对象的分类"><a href="#3-OC对象的分类" class="headerlink" title="3. OC对象的分类"></a>3. OC对象的分类</h2><p>OC中的对象可以分为 instance实例对象 class类对象 meta-class元类对象</p>
-<h3 id="3-1-实例对象"><a href="#3-1-实例对象" class="headerlink" title="3.1 实例对象"></a>3.1 实例对象</h3><p>instace实例对象: 通过调用类的alloc方法创建的对象.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSObject *obj1 = [[NSObject alloc] init];</span><br><span class="line">NSObject *obj2 = [[NSObject alloc] init];</span><br></pre></td></tr></table></figure>
-<p>obj1和obj2是两个实例对象, 他们的内存地址不同. 为了查看obj1和obj2的isa指针的值, 可以查看obj1和obj2的内存结构.<br><img src="/2017/08/03/01-OC对象本质/64157653.png" alt="64157653.png"><br><img src="/2017/08/03/01-OC对象本质/64289839.png" alt="64289839.png"></p>
-<blockquote>
-<p>通过查看内存数据, 前八个字节为isa指针, 比较obj1和obj2的isa指针相同.</p>
-</blockquote>
-<p>实例对象的内存结构为 isa指针+成员变量<br><img src="/2017/08/03/01-OC对象本质/51575182.png" alt="51575182.png"></p>
-<p><em>那么isa指针指向的是什么呢?</em></p>
-<h3 id="3-2-类对象"><a href="#3-2-类对象" class="headerlink" title="3.2 类对象"></a>3.2 类对象</h3><p>class类对象: 可以通过class方法和runtime方法获取一个类的类对象.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">NSObject *obj1 = [[NSObject alloc] init];</span><br><span class="line">NSObject *obj2 = [[NSObject alloc] init];</span><br><span class="line"></span><br><span class="line">// 一个类的类对象在内存中只有一份 class返回的一直都是类对象</span><br><span class="line">Class classObject1 = [obj1 class];</span><br><span class="line">Class classObject2 = [NSObject class];</span><br><span class="line">Class classObject3 = object_getClass(obj1);</span><br><span class="line">NSLog(@&quot;%p--%p--%p&quot;, classObject1, classObject2, classObject3);</span><br></pre></td></tr></table></figure>
-<p>通过<code>[obj1 class]</code>获取obj1的类对象, 打印obj1和obj2的类对象的内存地址, 两者的内存地址相同.<br><strong>每一个类在内存中只有一个class类对象</strong></p>
-<p><img src="/2017/08/03/01-OC对象本质/51594419.png" alt="51594419.png"></p>
-<h3 id="3-3-元类对象"><a href="#3-3-元类对象" class="headerlink" title="3.3 元类对象"></a>3.3 元类对象</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">NSObject *obj1 = [[NSObject alloc] init];</span><br><span class="line">NSObject *obj2 = [[NSObject alloc] init];</span><br><span class="line"></span><br><span class="line">Class obj1MetaClass = object_getClass([obj1 class]);</span><br><span class="line">Class obj2MetaClass = object_getClass([obj2 class]);</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;%p&quot;, obj1MetaClass);</span><br><span class="line">NSLog(@&quot;%p&quot;, obj2MetaClass);</span><br></pre></td></tr></table></figure>
-<p>每一个类在内存中有且只有一个元类对象, 元类对象的结构和类对象在内存中的结构相同.</p>
-<p><img src="/2017/08/03/01-OC对象本质/51613366.png" alt="51613366.png"></p>
-<h2 id="4-isa指针"><a href="#4-isa指针" class="headerlink" title="4.isa指针"></a>4.isa指针</h2><p>先附上一幅最经典的图<br><img src="/2017/08/03/01-OC对象本质/51671948.png" alt="51671948.png"></p>
-<p><img src="/2017/08/03/01-OC对象本质/52615464.png" alt="52615464.png"></p>
-<h2 id="5-struce-objc-class的结构"><a href="#5-struce-objc-class的结构" class="headerlink" title="5. struce objc_class的结构"></a>5. struce objc_class的结构</h2><p>在objc4的源码中查看<code>objc_object</code>的结构</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">struct objc_object &#123;</span><br><span class="line">    Class _Nonnull isa  OBJC_ISA_AVAILABILITY;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>单纯的object就只有一个isa指针</p>
-</blockquote>
-<p><code>objc_class</code>结构体继承自<code>objc_object</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">struct objc_class : objc_object &#123;</span><br><span class="line">    // Class ISA;</span><br><span class="line">    Class superclass;</span><br><span class="line">    cache_t cache;             // formerly cache pointer and vtable     方法缓存</span><br><span class="line">    class_data_bits_t bits;    // class_rw_t * plus custom rr/alloc flags  用于获取具体的类信息</span><br><span class="line"></span><br><span class="line">    class_rw_t *data() &#123; </span><br><span class="line">        return bits.data();</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>class_data_bigs_t</code>存储着类的具体信息, 通过<code>data()</code>方法获取具体类信息, 返回的类型是<code>class_rw_t</code>类型<br>来看一下<code>class_rw_t</code>的数据结构</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">struct class_rw_t &#123;</span><br><span class="line">    // Be warned that Symbolication knows the layout of this structure.</span><br><span class="line">    uint32_t flags;</span><br><span class="line">    uint32_t version;</span><br><span class="line"></span><br><span class="line">    const class_ro_t *ro;</span><br><span class="line"></span><br><span class="line">    method_array_t methods; // 方法列表</span><br><span class="line">    property_array_t properties; // 属性列表</span><br><span class="line">    protocol_array_t protocols; // 协议列表</span><br><span class="line"></span><br><span class="line">    Class firstSubclass;</span><br><span class="line">    Class nextSiblingClass;</span><br><span class="line"></span><br><span class="line">    char *demangledName;</span><br><span class="line">    ...</span><br><span class="line">    class_rw_t* data() &#123;</span><br><span class="line">        return (class_rw_t *)(bits &amp; FAST_DATA_MASK);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过<code>data()</code>获取数据的的时候, 是通过与<code>FAST_DATA_MASK</code>做位运算, <code>FAST_DATA_MASK</code>的值为<code>0x00007ffffffffff8UL</code></p>
-<p><code>class_rw_t</code>中存储着方法列表 属性列表 协议列表, 成员变量是存储在<code>class_ro_t</code>结构体中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">struct class_ro_t &#123;</span><br><span class="line">    uint32_t flags;</span><br><span class="line">    uint32_t instanceStart;</span><br><span class="line">    uint32_t instanceSize;</span><br><span class="line">#ifdef __LP64__</span><br><span class="line">    uint32_t reserved;</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">    const uint8_t * ivarLayout;</span><br><span class="line">    </span><br><span class="line">    const char * name;</span><br><span class="line">    method_list_t * baseMethodList;</span><br><span class="line">    protocol_list_t * baseProtocols;</span><br><span class="line">    const ivar_list_t * ivars; // 成员变量列表</span><br><span class="line"></span><br><span class="line">    const uint8_t * weakIvarLayout;</span><br><span class="line">    property_list_t *baseProperties;</span><br><span class="line"></span><br><span class="line">    method_list_t *baseMethods() const &#123;</span><br><span class="line">        return baseMethodList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>在<code>class_ro_t</code>结构体中存储着成员变量列表.</p>
-<p><img src="/2017/08/03/01-OC对象本质/50952681.png" alt="50952681.png"></p>
-
-          
+          <h2 id="1-NSObject对象"><a href="#1-NSObject对象" class="headerlink" title="1. NSObject对象"></a>1. NSObject对象</h2><p>我们再<code>Xcode</code>中编写的<code>Objective-C</code>代码, 底层是转换为C/C++代码, <code>OC</code>中的对象和类主要是基于C/C++中的结构体实现的.</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/03/01-OC对象本质/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -501,11 +474,7 @@
 
 
 
-  <span class="post-meta-divider">|</span>
 
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 

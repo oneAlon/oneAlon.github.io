@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-keywords:
-author: John Doe
-language:
+title: OneAlon
+subtitle: 小学生
+description: The more you learn, the less you know
+keywords: iOS
+author: OneAlon
+language: zh-Hans
 timezone:
 
 # URL
@@ -19,8 +19,8 @@ permalink: :year/:month/:day/:title/
 permalink_defaults:
 
 # Directory
-source_dir: source
-public_dir: public
+source_dir: source ## 从哪个文件夹获取资料
+public_dir: public ## 定义生产静态网站到哪个文件夹
 tag_dir: tags
 archive_dir: archives
 category_dir: categories
@@ -50,7 +50,7 @@ highlight:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 10
+  per_page: 10 ## 定义每一页多少条博客
   order_by: -date
   
 # Category & Tag
@@ -73,7 +73,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -79,17 +79,28 @@
 
 
 
-<meta name="description" content="The more you learn, the less you know">
+<meta name="description" content="1. NSObject对象我们再Xcode中编写的Objective-C代码, 底层是转换为C/C++代码, OC中的对象和类主要是基于C/C++中的结构体实现的.    创建一个Command Line Tool, 代码如下 1234567int main(int argc, const char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;">
 <meta name="keywords" content="iOS">
-<meta property="og:type" content="website">
-<meta property="og:title" content="OneAlon">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01. OC对象本质">
+<meta property="og:url" content="http://yoursite.com/2017/08/03/01-OC对象本质/index.html">
 <meta property="og:site_name" content="OneAlon">
-<meta property="og:description" content="The more you learn, the less you know">
+<meta property="og:description" content="1. NSObject对象我们再Xcode中编写的Objective-C代码, 底层是转换为C/C++代码, OC中的对象和类主要是基于C/C++中的结构体实现的.    创建一个Command Line Tool, 代码如下 1234567int main(int argc, const char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/34862291.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/64157653.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/64289839.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/51575182.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/51594419.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/51613366.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/51671948.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/52615464.png">
+<meta property="og:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/50952681.png">
+<meta property="og:updated_time" content="2018-08-03T09:20:56.772Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OneAlon">
-<meta name="twitter:description" content="The more you learn, the less you know">
+<meta name="twitter:title" content="01. OC对象本质">
+<meta name="twitter:description" content="1. NSObject对象我们再Xcode中编写的Objective-C代码, 底层是转换为C/C++代码, OC中的对象和类主要是基于C/C++中的结构体实现的.    创建一个Command Line Tool, 代码如下 1234567int main(int argc, const char * argv[]) &amp;#123;    @autoreleasepool &amp;#123;">
+<meta name="twitter:image" content="http://yoursite.com/2017/08/03/01-OC对象本质/34862291.png">
 
 
 
@@ -119,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/08/03/01-OC对象本质/"/>
 
 
 
 
 
-  <title>OneAlon</title>
+  <title>01. OC对象本质 | OneAlon</title>
   
 
 
@@ -144,8 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -218,9 +228,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -250,9 +260,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/03/01-OC对象本质/" itemprop="url">01. OC对象本质</a></h1>
+          <h1 class="post-title" itemprop="name headline">01. OC对象本质</h1>
         
 
         <div class="post-meta">
@@ -302,9 +310,7 @@
       
 
       
-        
-          
-            <h2 id="1-NSObject对象"><a href="#1-NSObject对象" class="headerlink" title="1. NSObject对象"></a>1. NSObject对象</h2><p>我们再<code>Xcode</code>中编写的<code>Objective-C</code>代码, 底层是转换为C/C++代码, <code>OC</code>中的对象和类主要是基于C/C++中的结构体实现的.</p>
+        <h2 id="1-NSObject对象"><a href="#1-NSObject对象" class="headerlink" title="1. NSObject对象"></a>1. NSObject对象</h2><p>我们再<code>Xcode</code>中编写的<code>Objective-C</code>代码, 底层是转换为C/C++代码, <code>OC</code>中的对象和类主要是基于C/C++中的结构体实现的.</p>
 <p>  <img src="/2017/08/03/01-OC对象本质/34862291.png" alt="34862291"></p>
 <p>创建一个<code>Command Line Tool</code>, 代码如下</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[]) &#123;</span><br><span class="line">    <span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">        <span class="built_in">NSObject</span> *obj = [[<span class="built_in">NSObject</span> alloc] init];</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, obj);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -357,8 +363,6 @@
 <p>在<code>class_ro_t</code>结构体中存储着成员变量列表.</p>
 <p><img src="/2017/08/03/01-OC对象本质/50952681.png" alt="50952681.png"></p>
 
-          
-        
       
     </div>
     
@@ -373,14 +377,20 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -390,10 +400,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -401,6 +412,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -421,8 +436,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -473,6 +497,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-NSObject对象"><span class="nav-number">1.</span> <span class="nav-text">1. NSObject对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-自定义对象的内存结构"><span class="nav-number">2.</span> <span class="nav-text">2. 自定义对象的内存结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-OC对象的分类"><span class="nav-number">3.</span> <span class="nav-text">3. OC对象的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-实例对象"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 实例对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-类对象"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 类对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-元类对象"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 元类对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-isa指针"><span class="nav-number">4.</span> <span class="nav-text">4.isa指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-struce-objc-class的结构"><span class="nav-number">5.</span> <span class="nav-text">5. struce objc_class的结构</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -606,6 +646,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
